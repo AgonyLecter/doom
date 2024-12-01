@@ -149,6 +149,7 @@
     <script>
         const modelViewer = document.getElementById('modelViewer');
         const overlay = document.getElementById('overlay');
+        let modelPlaced = false;
 
         // Hide the overlay when the model is loaded
         modelViewer.addEventListener('load', () => {
@@ -156,11 +157,19 @@
         });
 
         modelViewer.addEventListener('click', () => {
-            overlay.classList.remove('hidden'); // Show the loading overlay
-            setTimeout(() => {
-                window.location.href = 'start.html'; // Redirect to start.html
-            }, 2000); // Delay for the transition effect
+            if (!modelPlaced) {
+                // Set modelPlaced to true after the initial interaction
+                modelPlaced = true;
+                alert('Model placed in AR. Tap again to enter the site.');
+            } else {
+                // If the model is already placed, proceed to start.html
+                overlay.classList.remove('hidden'); // Show the loading overlay
+                setTimeout(() => {
+                    window.location.href = 'start.html'; // Redirect to start.html
+                }, 2000); // Delay for the transition effect
+            }
         });
     </script>
 </body>
 </html>
+
